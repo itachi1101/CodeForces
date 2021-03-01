@@ -33,33 +33,56 @@ ll expo(ll a, ll b, ll mod) {ll res = 1; while (b > 0) {if (b & 1)res = (res * a
 
 
 
-int vis[1005][1005] = {0};
-void dfs(vector<vector<int>>&b, int n, int m, int idx) {
 
-}
+
 void solve() {
 	ll t, n, m, x, y, z;
-	cin >> n >> m;
-	int arr[n + 1][m + 1];
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
+	int arr[3][3];
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
 			cin >> arr[i][j];
 		}
 	}
-	vector<vector<int>>b(n + 1, vector<int>(m + 1, -1));
-
-	cout << "YES" << endl;
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
-			cout << b[i][j] << " ";
+	int first_row = 0;
+	int second_row = 0;
+	int third_row = 0;
+	for (int i = 0; i < 3; i++) {
+		if (i == 0) {
+			first_row += (arr[i][0] + arr[i][1] + arr[i][2]);
 		}
-		cout << endl;
+		else if (i == 1) {
+			second_row += (arr[i][0] + arr[i][1] + arr[i][2]);
+
+		}
+		else {
+			third_row += (arr[i][0] + arr[i][1] + arr[i][2]);
+
+		}
 	}
 
+	x = third_row;
+	y = first_row;
+	z = second_row;
+	ll f_val = 0, s_val = 0, t_val = 0;
+	if (x >= y) {
+		f_val = ((x - y) + (z)) / 2;
+		s_val = x - f_val;
+		t_val = z - f_val;
+	}
+	else {
+		t_val = ((y - x) + (z)) / 2;
+		f_val = z - t_val;
+		s_val = x - f_val;
+	}
 
-
-
-
+	arr[0][0] = f_val;
+	arr[1][1] = s_val;
+	arr[2][2] = t_val;
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			cout << arr[i][j] << " ";
+		} cout << endl;
+	}
 
 
 
